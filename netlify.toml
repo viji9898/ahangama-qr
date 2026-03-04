@@ -1,0 +1,14 @@
+# netlify.toml
+[build]
+  command = ""
+  publish = "."
+
+
+[functions]
+  directory = "netlify/functions"
+
+# Route EVERYTHING to the redirect function (no SPA fallback needed)
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/redirect"
+  status = 200
