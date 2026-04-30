@@ -15,7 +15,7 @@ exports.handler = async (event) => {
 
     // Extract structured parameters
     const goal = readKV("g") || "h"; // default home
-    const venue = readKV("v") || "qr-root";
+    const venue = readKV("v") || "no-venue-provided";
     const surface = readKV("s");
     const creative = readKV("c");
 
