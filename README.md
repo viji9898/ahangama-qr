@@ -168,7 +168,7 @@ utm_term=h
 Promotion example:
 
 utm_campaign=qr_promo_2026
-utm_content=kaffi__ps
+utm_content=kaffi\_\_ps
 utm_term=h
 
 GA4 segmentation enables:
