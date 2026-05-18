@@ -15,9 +15,11 @@ exports.handler = async (event) => {
 
     // Extract structured parameters
     const goal = readKV("g") || "h"; // default home
+    const destinationSlug = readKV("q");
     const venue = readKV("v") || "no-venue-provided";
     const surface = readKV("s");
     const creative = readKV("c");
+    const campaign = destinationSlug ? "qr_promo_2026" : "qr_launch_2026";
 
     // Build utm_content
     const contentParts = [venue];
@@ -27,7 +29,7 @@ exports.handler = async (event) => {
     const utmParams = new URLSearchParams({
       utm_source: "qr",
       utm_medium: "offline",
-      utm_campaign: "qr_launch_2026",
+      utm_campaign: campaign,
       utm_content: contentParts.join("__"),
       utm_term: goal,
     });
@@ -41,7 +43,8 @@ exports.handler = async (event) => {
       }
     });
 
-    const redirectUrl = `${BASE_URL}/?${utmParams.toString()}`;
+    const redirectPath = destinationSlug ? `/qr/${destinationSlug}` : "/";
+    const redirectUrl = `${BASE_URL}${redirectPath}?${utmParams.toString()}`;
 
     return {
       statusCode: 302,

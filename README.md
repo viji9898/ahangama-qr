@@ -89,6 +89,25 @@ Example:
 
 ---
 
+## Promotion Routing (Optional, Backward Compatible)
+
+Use this when a QR code should land on a dedicated Ahangama page while keeping the existing tracking structure.
+
+/q/:destinationSlug/v/:venueSlug/s/:surfaceCode
+
+Example:
+
+/q/kaffi-ahangama/v/kaffi/s/ps
+
+This redirects to:
+
+https://ahangama.com/qr/kaffi-ahangama?utm_source=qr&utm_medium=offline&utm_campaign=qr_promo_2026&utm_content=kaffi__ps&utm_term=h
+
+Important:
+URLs without `q/:destinationSlug` keep the current homepage redirect behavior and continue using the launch campaign.
+
+---
+
 # Surface Codes (Locked Vocabulary)
 
 Keep consistent naming across all venues.
@@ -136,13 +155,20 @@ Every redirect appends:
 
 - utm_source = qr
 - utm_medium = offline
-- utm_campaign = qr_launch_2026
+- utm_campaign = qr_launch_2026 for standard QR URLs
+- utm_campaign = qr_promo_2026 for promotion URLs using `q/:destinationSlug`
 - utm_content = venue**surface**creative
 - utm_term = goal
 
 Example:
 
 utm_content=fruit-cafe\_\_ps
+utm_term=h
+
+Promotion example:
+
+utm_campaign=qr_promo_2026
+utm_content=kaffi__ps
 utm_term=h
 
 GA4 segmentation enables:
@@ -178,6 +204,10 @@ http://localhost:54707/g/p/v/fruit-cafe/s/tb
 Creative Variant:
 
 http://localhost:54707/v/palm-garden-ayurveda/s/ps/c/b
+
+Promotion QR:
+
+http://localhost:54707/q/kaffi-ahangama/v/kaffi/s/ps
 
 ---
 
