@@ -16,10 +16,12 @@ exports.handler = async (event) => {
     // Extract structured parameters
     const goal = readKV("g") || "h"; // default home
     const destinationSlug = readKV("q");
+    const directDestinationSlug = readKV("d");
+    const promo = readKV("promo");
     const venue = readKV("v") || "no-venue-provided";
     const surface = readKV("s");
     const creative = readKV("c");
-    const campaign = destinationSlug ? "qr_promo_2026" : "qr_launch_2026";
+    const campaign = destinationSlug || directDestinationSlug || promo ? "qr_promo_2026" : "qr_launch_2026";
 
     // Build utm_content
     const contentParts = [venue];
@@ -34,6 +36,10 @@ exports.handler = async (event) => {
       utm_term: goal,
     });
 
+    if (promo) {
+      utmParams.set("promo", promo);
+    }
+
     // Preserve non-UTM incoming query params
     const incomingQuery = event.queryStringParameters || {};
 
@@ -43,7 +49,11 @@ exports.handler = async (event) => {
       }
     });
 
-    const redirectPath = destinationSlug ? `/qr/${destinationSlug}` : "/";
+    const redirectPath = directDestinationSlug
+      ? `/${directDestinationSlug}`
+      : destinationSlug
+        ? `/qr/${destinationSlug}`
+        : "/";
     const redirectUrl = `${BASE_URL}${redirectPath}?${utmParams.toString()}`;
 
     return {

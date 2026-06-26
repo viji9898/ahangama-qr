@@ -108,6 +108,44 @@ URLs without `q/:destinationSlug` keep the current homepage redirect behavior an
 
 ---
 
+## Direct Destination Promotion Routing
+
+Use this for printed QR codes that should land directly on a clean Ahangama page like `/lighthouse`, `/kaffi`, or `/gusta`.
+
+/d/:destinationSlug/v/:venueSlug/s/:surfaceCode/promo/:promoCode
+
+Example:
+
+/d/lighthouse/v/lighthouse/s/ps/promo/free_pass
+
+This redirects to:
+
+https://ahangama.com/lighthouse?utm_source=qr&utm_medium=offline&utm_campaign=qr_promo_2026&utm_content=lighthouse__ps&utm_term=h&promo=free_pass
+
+Important:
+Use `d/:destinationSlug` only when the destination should be `https://ahangama.com/:destinationSlug`.
+The older `q/:destinationSlug` route still redirects to `https://ahangama.com/qr/:destinationSlug`.
+
+---
+
+# Current Plastic Stand QR Set
+
+Surface = `ps`.
+Promo = `free_pass`.
+
+| Stand / Venue | QR URL to print | Final destination |
+| ------------- | --------------- | ----------------- |
+| Lighthouse | `https://qr.ahangama.com/d/lighthouse/v/lighthouse/s/ps/promo/free_pass` | `https://ahangama.com/lighthouse` |
+| Kaffi | `https://qr.ahangama.com/d/kaffi/v/kaffi/s/ps/promo/free_pass` | `https://ahangama.com/kaffi` |
+| Gusta | `https://qr.ahangama.com/d/gusta/v/gusta/s/ps/promo/free_pass` | `https://ahangama.com/gusta` |
+| Tahini | `https://qr.ahangama.com/d/tahini/v/tahini/s/ps/promo/free_pass` | `https://ahangama.com/tahini` |
+| Living Room | `https://qr.ahangama.com/d/living-Room/v/living-room/s/ps/promo/free_pass` | `https://ahangama.com/living-Room` |
+
+Note:
+`lighthouse` was listed twice in the request. Use the same Lighthouse QR for both stands if both physical stands should report as the same venue and surface.
+
+---
+
 # Surface Codes (Locked Vocabulary)
 
 Keep consistent naming across all venues.
