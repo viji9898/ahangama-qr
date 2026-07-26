@@ -128,6 +128,20 @@ The older `q/:destinationSlug` route still redirects to `https://ahangama.com/qr
 
 ---
 
+## Comp Pass Routing
+
+For comp-pass QR codes, the venue in the path is automatically added to the destination query string.
+
+```text
+https://qr.ahangama.com/d/comp-pass/v/petals/s/ps
+```
+
+This redirects to `https://ahangama.com/comp-pass?venue=petals` with the standard QR attribution parameters.
+
+If `/v/:venueSlug` is omitted, the redirect goes to `/comp-pass` without a `venue` query parameter.
+
+---
+
 # Current Plastic Stand QR Set
 
 Surface = `ps`.

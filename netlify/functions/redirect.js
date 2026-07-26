@@ -18,7 +18,8 @@ exports.handler = async (event) => {
     const destinationSlug = readKV("q");
     const directDestinationSlug = readKV("d");
     const promo = readKV("promo");
-    const venue = readKV("v") || "no-venue-provided";
+    const venueSlug = readKV("v");
+    const venue = venueSlug || "no-venue-provided";
     const surface = readKV("s");
     const creative = readKV("c");
     const campaign = destinationSlug || directDestinationSlug || promo ? "qr_promo_2026" : "qr_launch_2026";
@@ -48,6 +49,11 @@ exports.handler = async (event) => {
         utmParams.set(key, value);
       }
     });
+
+    if (directDestinationSlug === "comp-pass") {
+      utmParams.delete("venue");
+      if (venueSlug) utmParams.set("venue", venueSlug);
+    }
 
     const redirectPath = directDestinationSlug
       ? `/${directDestinationSlug}`
