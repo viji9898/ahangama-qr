@@ -23,6 +23,7 @@ exports.handler = async (event) => {
     const surface = readKV("s");
     const creative = readKV("c");
     const campaign = destinationSlug || directDestinationSlug || promo ? "qr_promo_2026" : "qr_launch_2026";
+    const isPostcardStandCompPassRoute = venueSlug && surface === "ps" && !destinationSlug && !directDestinationSlug;
 
     // Build utm_content
     const contentParts = [venue];
@@ -59,7 +60,9 @@ exports.handler = async (event) => {
       ? `/${directDestinationSlug}`
       : destinationSlug
         ? `/qr/${destinationSlug}`
-        : "/";
+        : isPostcardStandCompPassRoute
+          ? "/comp-pass"
+          : "/";
     const redirectUrl = `${BASE_URL}${redirectPath}?${utmParams.toString()}`;
 
     return {

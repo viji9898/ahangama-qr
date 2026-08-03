@@ -140,6 +140,9 @@ This redirects to `https://ahangama.com/comp-pass?venue=petals` with the standar
 
 If `/v/:venueSlug` is omitted, the redirect goes to `/comp-pass` without a `venue` query parameter.
 
+Special case:
+`/v/animals/s/ps` redirects to `https://ahangama.com/comp-pass` and preserves the standard QR UTM parameters.
+
 ---
 
 # Current Plastic Stand QR Set
@@ -185,6 +188,8 @@ s/ps
 Example:
 
 /v/kaffi/s/ps
+
+These standard postcard-stand URLs redirect to `https://ahangama.com/comp-pass` and preserve the standard QR UTM parameters.
 
 ---
 
